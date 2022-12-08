@@ -1,4 +1,4 @@
-package ru.alexleru.ya.gamesnumbers.usecases
+package ru.alexleru.ya.gamesnumbers.domain.usecases
 
 import ru.alexleru.ya.gamesnumbers.domain.entity.Question
 import ru.alexleru.ya.gamesnumbers.domain.repository.GameRepository
