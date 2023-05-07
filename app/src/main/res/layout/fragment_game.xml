@@ -17,42 +17,54 @@
         tools:text="@string/time" />
 
     <TextView
-        android:id="@+id/sum_text"
+        android:id="@+id/tv_sum"
         style="@style/Button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        app:layout_constraintDimensionRatio="1:1"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_left_number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTime"
-        tools:text="10" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        tools:text="1" />
 
     <TextView
-        android:id="@+id/answer_text"
+        android:id="@+id/tv_left_number"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:background="@color/teal_700"
+        app:layout_constraintBottom_toTopOf="@id/tv_option_1"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/tv_question"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sum"
+        tools:text="7" />
+
+    <TextView
+        android:id="@+id/tv_question"
+        style="@style/Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="@id/tv_left_number"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.762"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sum_text"
+        app:layout_constraintStart_toEndOf="@id/tv_left_number"
+        app:layout_constraintTop_toTopOf="@id/tv_left_number"
         tools:text="\?" />
 
     <TextView
-        android:id="@+id/visible_number_text"
-        style="@style/Button"
-        android:layout_width="0dp"
+        android:id="@+id/tv_answers_progress"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.302"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sum_text"
-        tools:text="5" />
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_left_number"
+        app:layout_constraintVertical_chainStyle="spread"
+        tools:layout_editor_absoluteX="16dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -60,80 +72,78 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_option_1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/visible_number_text" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_answers_progress" />
 
     <TextView
-        android:id="@+id/option1"
+        android:id="@+id/tv_option_1"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/holo_green_light"
+        app:layout_constraintBottom_toTopOf="@id/tv_option_4"
+        app:layout_constraintEnd_toStartOf="@id/tv_option_5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTime"
-        tools:text="10" />
+        tools:text="1" />
 
     <TextView
-        android:id="@+id/option2"
+        android:id="@+id/tv_option_2"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTime"
-        tools:text="10" />
+        android:background="@android:color/holo_orange_light"
+        app:layout_constraintBottom_toTopOf="@id/tv_option_4"
+        app:layout_constraintEnd_toStartOf="@id/tv_option_6"
+        app:layout_constraintStart_toEndOf="@id/tv_option_4"
+        tools:text="2" />
 
     <TextView
-        android:id="@+id/option3"
+        android:id="@+id/tv_option_3"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        app:layout_constraintDimensionRatio="1:1"
+        android:background="@android:color/holo_purple"
+        app:layout_constraintBottom_toTopOf="@id/tv_option_4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTime"
-        tools:text="10" />
+        app:layout_constraintStart_toEndOf="@id/tv_option_5"
+        tools:text="3" />
 
     <TextView
-        android:id="@+id/option4"
+        android:id="@+id/tv_option_4"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_option_5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTime"
-        tools:text="10" />
+        tools:text="4" />
 
     <TextView
-        android:id="@+id/option5"
+        android:id="@+id/tv_option_5"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTime"
-        tools:text="10" />
+        android:background="@android:color/holo_red_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_option_6"
+        app:layout_constraintStart_toEndOf="@id/tv_option_4"
+        tools:text="5" />
 
     <TextView
-        android:id="@+id/option6"
+        android:id="@+id/tv_option_6"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        app:layout_constraintDimensionRatio="1:1"
+        android:background="@android:color/holo_blue_bright"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTime"
-        tools:text="10" />
+        app:layout_constraintStart_toEndOf="@id/tv_option_5"
+        tools:text="6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
