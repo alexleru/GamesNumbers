@@ -6,15 +6,52 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.alexleru.ya.gamesnumbers.R
+import ru.alexleru.ya.gamesnumbers.databinding.FragmentChooseLevelBinding
+import ru.alexleru.ya.gamesnumbers.domain.entity.Level
+import java.lang.RuntimeException
 
 class ChooseLevelFragment : Fragment() {
+
+    private var _binding: FragmentChooseLevelBinding? = null
+    private val binding: FragmentChooseLevelBinding
+        get() = _binding ?: throw RuntimeException("FragmentChooseLevelBinding == null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_choose_level, container, false)
+    ): View {
+        _binding = FragmentChooseLevelBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(binding) {
+            testLevelButton.setOnClickListener { nextGameFragment(Level.TEST) }
+            easyLevelButton.setOnClickListener { nextGameFragment(Level.EASY) }
+            normalLevelButton.setOnClickListener { nextGameFragment(Level.NORMAL) }
+            highLevelButton.setOnClickListener { nextGameFragment(Level.HARD) }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun nextGameFragment(level: Level) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_activity, GameFragment.newInstance(level))
+            .addToBackStack(GameFragment.NAME)
+
+            .commit()
+    }
+
+    companion object {
+
+        const val NAME_FRAGMENT = "ChooseLevelFragment"
+        fun newInstance(): ChooseLevelFragment {
+            return ChooseLevelFragment()
+        }
+    }
 }

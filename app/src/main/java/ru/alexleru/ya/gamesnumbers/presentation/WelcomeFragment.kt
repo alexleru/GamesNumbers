@@ -6,14 +6,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.alexleru.ya.gamesnumbers.R
+import ru.alexleru.ya.gamesnumbers.databinding.FragmentWelcomeBinding
+import java.lang.RuntimeException
 
 class WelcomeFragment : Fragment() {
+
+    private var _binding: FragmentWelcomeBinding? = null
+    private val binding: FragmentWelcomeBinding
+        get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+    ): View {
+        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.button.setOnClickListener {
+            nextFragmentChooseLevel()
+        }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun nextFragmentChooseLevel(){
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_activity, ChooseLevelFragment.newInstance())
+            .addToBackStack(ChooseLevelFragment.NAME_FRAGMENT)
+            .commit()
     }
 }
