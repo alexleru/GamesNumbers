@@ -2,7 +2,6 @@ package ru.alexleru.ya.gamesnumbers.presentation
 
 import android.app.Application
 import android.os.CountDownTimer
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +14,7 @@ import ru.alexleru.ya.gamesnumbers.domain.entity.Question
 import ru.alexleru.ya.gamesnumbers.domain.usecases.GenerateQuestionUseCases
 import ru.alexleru.ya.gamesnumbers.domain.usecases.GetGameSettingsUseCase
 
-class GameViewModel(application: Application) : AndroidViewModel(application) {
+class GameViewModel(private val level: Level, private val application: Application) : ViewModel() {
 
     private var context = application
 
@@ -63,7 +62,11 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private var countOfRightAnswers = 0
     private var countOfQuestions = 0
 
-    fun startGame(level: Level) {
+    init {
+        startGame()
+    }
+
+    fun startGame() {
         getGameSettingsLevel(level)
         startTimer()
         generateQuestion()
@@ -127,14 +130,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         (timer as CountDownTimer).start()
     }
 
-    private fun formattedTime(millisUntilFinished: Long): String{
-        val sec = millisUntilFinished/ MILLIS_IN_SECOND
-        val min = sec/ SECONDS_IN_MINUTE
+    private fun formattedTime(millisUntilFinished: Long): String {
+        val sec = millisUntilFinished / MILLIS_IN_SECOND
+        val min = sec / SECONDS_IN_MINUTE
         val secLeft = sec - min * SECONDS_IN_MINUTE
         return String.format("%02d : %02d", min, secLeft)
     }
 
-    private fun finishGame(){
+    private fun finishGame() {
         _gameResult.value = GameResult(
             enoughCount.value == true && enoughPercent.value == true,
             countOfRightAnswers,

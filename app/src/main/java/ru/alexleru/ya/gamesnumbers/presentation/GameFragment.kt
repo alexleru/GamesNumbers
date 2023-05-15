@@ -15,10 +15,14 @@ import ru.alexleru.ya.gamesnumbers.domain.entity.Level
 
 class GameFragment : Fragment() {
 
+    private val gameViewModelFactory by lazy {
+        GameViewModelFactory(level, requireActivity().application)
+    }
+
     private val gameViewModel by lazy {
         ViewModelProvider(
             this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+            gameViewModelFactory
         )[GameViewModel::class.java]
     }
 
@@ -115,7 +119,6 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         setClickListenersToOptions()
-        gameViewModel.startGame(level)
     }
 
     override fun onDestroyView() {

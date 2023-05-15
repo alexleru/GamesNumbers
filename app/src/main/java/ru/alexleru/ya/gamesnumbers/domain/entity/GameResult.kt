@@ -1,6 +1,7 @@
 package ru.alexleru.ya.gamesnumbers.domain.entity
 
 import android.os.Parcelable
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -9,4 +10,11 @@ data class GameResult(
     val countOfRightAnswer: Int,
     val countOfQuestions: Int,
     val gameSettings: GameSettings
-) : Parcelable
+) : Parcelable {
+    @IgnoredOnParcel
+    val scorePercentage =
+        if (countOfQuestions == 0)
+            0
+        else
+            (countOfRightAnswer / countOfQuestions.toDouble() * 100).toInt()
+}
