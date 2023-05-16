@@ -1,14 +1,13 @@
 package ru.alexleru.ya.gamesnumbers.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.alexleru.ya.gamesnumbers.R
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import ru.alexleru.ya.gamesnumbers.databinding.FragmentChooseLevelBinding
 import ru.alexleru.ya.gamesnumbers.domain.entity.Level
-import java.lang.RuntimeException
 
 class ChooseLevelFragment : Fragment() {
 
@@ -40,11 +39,10 @@ class ChooseLevelFragment : Fragment() {
     }
 
     private fun nextGameFragment(level: Level) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_activity, GameFragment.newInstance(level))
-            .addToBackStack(GameFragment.NAME)
 
-            .commit()
+        findNavController().navigate(
+            ChooseLevelFragmentDirections.actionChooseLevelFragmentToGameFragment(level)
+        )
     }
 
     companion object {

@@ -8,15 +8,18 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.alexleru.ya.gamesnumbers.R
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import ru.alexleru.ya.gamesnumbers.databinding.FragmentGameBinding
 import ru.alexleru.ya.gamesnumbers.domain.entity.GameResult
 import ru.alexleru.ya.gamesnumbers.domain.entity.Level
 
 class GameFragment : Fragment() {
 
+    private val args by navArgs<GameFragmentArgs>()
+
     private val gameViewModelFactory by lazy {
-        GameViewModelFactory(level, requireActivity().application)
+        GameViewModelFactory(args.level, requireActivity().application)
     }
 
     private val gameViewModel by lazy {
@@ -37,17 +40,9 @@ class GameFragment : Fragment() {
         )
     }
 
-    private lateinit var level: Level
-
     private var _binding: FragmentGameBinding? = null
     private val binding: FragmentGameBinding
         get() = _binding ?: throw RuntimeException("FragmentGameBinding == null")
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -126,20 +121,18 @@ class GameFragment : Fragment() {
         _binding = null
     }
 
-    private fun parseArgs() {
-        requireArguments().getParcelable<Level>(LEVEL)?.let { level = it }
-    }
 
     private fun nextGameFinish(gameResult: GameResult) {
+        findNavController().navigate(
+            GameFragmentDirections.actionGameFragmentToGameFinishedFragment(
+                gameResult
+            )
+        )
 
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_activity, GameFinishedFragment.newInstance(gameResult))
-            .addToBackStack(null)
-            .commit()
     }
 
     companion object {
-        private const val LEVEL = "LEVEL"
+        const val LEVEL = "LEVEL"
         const val NAME = "GameFragment"
         fun newInstance(level: Level) = GameFragment().apply {
             arguments = Bundle().apply {
