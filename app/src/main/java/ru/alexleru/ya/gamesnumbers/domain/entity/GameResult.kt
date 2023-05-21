@@ -12,16 +12,12 @@ data class GameResult(
     val gameSettings: GameSettings
 ) : Parcelable {
     @IgnoredOnParcel
-    val scorePercentage =
-        if (countOfQuestions == 0)
-            0
-        else
-            (countOfRightAnswer / countOfQuestions.toDouble() * 100).toInt()
-    val scorePercentageString: String
-        get() = scorePercentage.toString()
-    val countOfRightAnswerString: String
-        get() = countOfRightAnswer.toString()
-    val countOfQuestionsString: String
-        get() = countOfQuestions.toString()
+    val scorePercentage: Int
+        get() {
+           return if (countOfQuestions == 0)
+                0
+            else
+                (countOfRightAnswer / countOfQuestions.toDouble() * 100).toInt()
+        }
 
 }

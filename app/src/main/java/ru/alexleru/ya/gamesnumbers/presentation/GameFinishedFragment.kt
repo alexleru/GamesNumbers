@@ -14,9 +14,6 @@ import ru.alexleru.ya.gamesnumbers.domain.entity.GameResult
 class GameFinishedFragment : Fragment() {
 
     private val args by navArgs<GameFinishedFragmentArgs>()
-    private val gameResult: GameResult by lazy {
-        args.gameResult
-    }
 
     private var _binding: FragmentGameFinishedBinding? = null
     private val binding: FragmentGameFinishedBinding
@@ -44,36 +41,8 @@ class GameFinishedFragment : Fragment() {
 
     private fun bindView() {
         binding.gameResult = args.gameResult
-        with(binding) {
-            emojiResult.setImageResource(getImgResource())
 
-//            tvRequiredAnswers.text = String.format(
-//                getString(R.string.required_score), gameResult.countOfRightAnswer.toString()
-//            )
-//
-//            tvScoreAnswers.text = String.format(
-//                getString(R.string.score_answers),
-//                gameResult.gameSettings.minCountOfRightAnswer.toString()
-//            )
-//
-//
-//            tvRequiredPercentage.text = String.format(
-//                getString(R.string.required_percentage),
-//                gameResult.gameSettings.minPercentOfRightAnswer.toString()
-//            )
-//
-//            tvScorePercentage.text = String.format(
-//                getString(R.string.score_percentage), gameResult.scorePercentage.toString()
-//            )
-        }
     }
-
-    private fun getImgResource(): Int {
-        val isWinner = gameResult.winner
-        return if (isWinner) R.drawable.ic_launcher_background
-        else R.color.purple_200
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
