@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="gameResult"
             type="ru.alexleru.ya.gamesnumbers.domain.entity.GameResult" />

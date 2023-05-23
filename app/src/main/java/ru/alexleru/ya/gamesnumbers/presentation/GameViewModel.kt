@@ -14,7 +14,7 @@ import ru.alexleru.ya.gamesnumbers.domain.entity.Question
 import ru.alexleru.ya.gamesnumbers.domain.usecases.GenerateQuestionUseCases
 import ru.alexleru.ya.gamesnumbers.domain.usecases.GetGameSettingsUseCase
 
-class GameViewModel(private val level: Level, private val application: Application) : ViewModel() {
+class GameViewModel(private val level: Level, application: Application) : ViewModel() {
 
     private var context = application
 
@@ -66,7 +66,7 @@ class GameViewModel(private val level: Level, private val application: Applicati
         startGame()
     }
 
-    fun startGame() {
+    private fun startGame() {
         getGameSettingsLevel(level)
         startTimer()
         generateQuestion()

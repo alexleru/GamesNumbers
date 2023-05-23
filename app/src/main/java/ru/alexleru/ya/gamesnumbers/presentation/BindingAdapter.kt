@@ -1,7 +1,11 @@
 package ru.alexleru.ya.gamesnumbers.presentation
 
+import android.content.Context
+import android.content.res.ColorStateList
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import ru.alexleru.ya.gamesnumbers.R
 import ru.alexleru.ya.gamesnumbers.domain.entity.GameResult
@@ -34,11 +38,11 @@ fun bindRequiredPercentage(textView: TextView, percent: Int) {
 fun bindScorePercentage(textView: TextView, gameResult: GameResult) {
     textView.text = String.format(
         textView.context.getString(R.string.score_percentage),
-        scorPerscentage(gameResult)
+        scorePerscentage(gameResult)
     )
 }
 
-private fun scorPerscentage(gameResult: GameResult): Int {
+private fun scorePerscentage(gameResult: GameResult): Int {
     return if (gameResult.countOfQuestions == 0)
         0
     else
@@ -46,11 +50,52 @@ private fun scorPerscentage(gameResult: GameResult): Int {
 }
 
 @BindingAdapter("imgResult")
-fun bindImgResult(imageView: ImageView, boolean: Boolean){
+fun bindImgResult(imageView: ImageView, boolean: Boolean) {
     imageView.setImageResource(getImgResource(boolean))
 }
 
 private fun getImgResource(boolean: Boolean): Int {
     return if (boolean) R.drawable.ic_launcher_background
     else R.color.purple_200
+}
+
+@BindingAdapter("sum")
+fun bindTextViewSum(textView: TextView, int: Int) {
+    textView.text = int.toString()
+}
+
+@BindingAdapter("leftNumber")
+fun bindTextViewLeftNumber(textView: TextView, int: Int) {
+    textView.text = int.toString()
+}
+
+@BindingAdapter("progressColor")
+fun bindProgressColor(progressBar: ProgressBar, boolean: Boolean){
+    val color = getColorByState(progressBar.context, boolean)
+    progressBar.progressTintList = ColorStateList.valueOf(color)
+}
+
+@BindingAdapter("textColorProgress")
+fun bindTextColor(textView: TextView, boolean: Boolean){
+    textView.setTextColor(getColorByState(textView.context, boolean))
+}
+
+private fun getColorByState(context: Context, goodState: Boolean): Int {
+    val colorResId = if (goodState) {
+        android.R.color.holo_green_light
+    } else {
+        android.R.color.holo_red_light
+    }
+    return ContextCompat.getColor(context, colorResId)
+}
+
+interface ClickOption{
+    fun onClick(int: Int)
+}
+
+@BindingAdapter("optionClick")
+fun bindOptions(textView: TextView, findOption: ClickOption){
+    textView.setOnClickListener {
+        findOption.onClick(textView.text.toString().toInt())
+    }
 }

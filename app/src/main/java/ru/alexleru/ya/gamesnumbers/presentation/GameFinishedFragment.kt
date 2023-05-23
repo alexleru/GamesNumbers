@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import ru.alexleru.ya.gamesnumbers.R
 import ru.alexleru.ya.gamesnumbers.databinding.FragmentGameFinishedBinding
-import ru.alexleru.ya.gamesnumbers.domain.entity.GameResult
 
 class GameFinishedFragment : Fragment() {
 
@@ -51,14 +49,5 @@ class GameFinishedFragment : Fragment() {
 
     private fun retryGame() {
         findNavController().popBackStack()
-    }
-
-    companion object {
-        const val RESULT = "RESULT"
-        fun newInstance(gameResult: GameResult) = GameFinishedFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(RESULT, gameResult)
-            }
-        }
     }
 }
