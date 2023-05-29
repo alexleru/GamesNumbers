@@ -27,16 +27,6 @@ class GameFragment : Fragment() {
         )[GameViewModel::class.java]
     }
 
-//    private val list by lazy {
-//        listOf(
-//            binding.tvOption1,
-//            binding.tvOption2,
-//            binding.tvOption3,
-//            binding.tvOption4,
-//            binding.tvOption5,
-//            binding.tvOption6
-//        )
-//    }
 
     private var _binding: FragmentGameBinding? = null
     private val binding: FragmentGameBinding
